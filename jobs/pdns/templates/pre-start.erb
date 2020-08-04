@@ -1,0 +1,13 @@
+#!/bin/bash
+set -e
+
+JOB_NAME=pdns
+JOB_DIR="/var/vcap/jobs/$JOB_NAME"
+STORE_DIR="/var/vcap/store/$JOB_NAME"
+PACKAGE_DIR="/var/vcap/packages/$JOB_NAME"
+
+mkdir -p "${STORE_DIR}"
+
+<% if_p("sqlite.database") do |database| %>
+  /var/vcap/packages/sqlite/bin/sqlite3 "${STORE_DIR}/<%= database %>" < "${JOB_DIR}/migrations/gsqlite3.sql"
+<% end %>

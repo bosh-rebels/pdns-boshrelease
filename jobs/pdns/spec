@@ -7,13 +7,17 @@ templates:
   pipe.conf.erb: etc/pipe.conf
   pipe.erb: bin/pipe
   pipe.example.com.pl: bin/pipe.example.com.pl
-
+  migrations/gsqlite3.sql: migrations/gsqlite3.sql
+  pre-start.erb: bin/pre-start
 
 packages:
 - boost
 - pdns
+- sqlite
 
 properties:
+  sqlite.database:
+    description: Name of sqlite database, if using gsqlite3 backend
   named_conf:
     default: ''
     description: |

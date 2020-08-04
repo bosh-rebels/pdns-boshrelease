@@ -19,15 +19,23 @@ instance_groups:
   stemcell: ubuntu
   networks:
   - name: default
-    static_ips: [ 10.244.0.34 ]
+    # static_ips: [ 10.244.0.34 ]
   jobs:
   - name: pdns
     release: pdns
     properties:
+      sqlite:
+        database: dns.db
       pdns_conf: |
-        launch=pipe
-        pipe-command=/var/vcap/jobs/pdns/bin/pipe.example.com.pl
+        launch=gsqlite3
+        gsqlite3-database=/var/vcap/store/pdns/dns.db
         local-ipv6=
+        webserver=true
+        webserver-address=0.0.0.0
+        webserver-allow-from=0.0.0.0/0,::/0
+        api=yes
+        api-key=changeme
+
 
 update:
   canaries: 1
