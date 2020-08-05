@@ -9,5 +9,7 @@ PACKAGE_DIR="/var/vcap/packages/$JOB_NAME"
 mkdir -p "${STORE_DIR}"
 
 <% if_p("sqlite.database") do |database| %>
-  /var/vcap/packages/sqlite/bin/sqlite3 "${STORE_DIR}/<%= database %>" < "${JOB_DIR}/migrations/gsqlite3.sql"
+  if [ ! -f "${STORE_DIR}/<%= database %>" ]; then
+    /var/vcap/packages/sqlite/bin/sqlite3 "${STORE_DIR}/<%= database %>" < "${JOB_DIR}/migrations/gsqlite3.sql"
+  fi
 <% end %>
