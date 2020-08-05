@@ -4,6 +4,7 @@ name: pdns
 dependencies:
 - boost
 - sqlite
+- lua
 
 files:
  - pdns/pdns-4.*.tar.bz2 # from https://downloads.powerdns.com/releases

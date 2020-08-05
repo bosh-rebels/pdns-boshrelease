@@ -29,13 +29,14 @@ instance_groups:
       pdns_conf: |
         launch=gsqlite3
         gsqlite3-database=/var/vcap/store/pdns/dns.db
-        local-ipv6=
+        do-ipv6-additional-processing=no
+        local-address=0.0.0.0:53
+        only-notify=0.0.0.0/0
         webserver=true
         webserver-address=0.0.0.0
-        webserver-allow-from=0.0.0.0/0,::/0
+        webserver-allow-from=0.0.0.0/0
         api=yes
         api-key=changeme
-
 
 update:
   canaries: 1
