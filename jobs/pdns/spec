@@ -7,7 +7,7 @@ templates:
   pipe.conf.erb: etc/pipe.conf
   pipe.erb: bin/pipe
   pipe.example.com.pl: bin/pipe.example.com.pl
-  migrations/gsqlite3.sql: migrations/gsqlite3.sql
+  seed/schema.sqlite3.sql: seed/schema.sqlite3.sql
   pre-start.erb: bin/pre-start
 
 packages:
