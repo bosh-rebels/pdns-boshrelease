@@ -7,4 +7,4 @@ dependencies:
 - lua
 
 files:
- - pdns/pdns-4.*.tar.bz2 # from https://downloads.powerdns.com/releases
+ - pdns/pdns-4.3.0.tar.bz2 # https://downloads.powerdns.com/releases/pdns-4.3.0.tar.bz2
