@@ -19,8 +19,10 @@ instance_groups:
   stemcell: ubuntu
   networks:
   - name: default
-    # static_ips: [ 10.244.0.34 ]
   jobs:
+  - name: smoke-test
+    release: pdns
+    properties: {}
   - name: pdns
     release: pdns
     properties:
@@ -36,7 +38,11 @@ instance_groups:
         webserver-address=0.0.0.0
         webserver-allow-from=0.0.0.0/0
         api=yes
-        api-key=changeme
+        api-key=((api_key))
+
+variables:
+  - name: api_key
+    type: password
 
 update:
   canaries: 1
