@@ -2,7 +2,7 @@
 name: smoke-test
 
 templates:
-  run.sh: bin/run
+  run.sh.erb: bin/run
 
 packages: []
 
