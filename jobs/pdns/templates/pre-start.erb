@@ -13,3 +13,8 @@ mkdir -p "${STORE_DIR}"
     /var/vcap/packages/sqlite/bin/sqlite3 "${STORE_DIR}/<%= database %>" < "${JOB_DIR}/seed/schema.sqlite3.sql"
   fi
 <% end %>
+
+# Running pdns and bosh-dns is not feasible
+/var/vcap/bosh/bin/monit stop bosh-dns
+/var/vcap/bosh/bin/monit stop bosh-dns-resolvconf
+/var/vcap/bosh/bin/monit stop bosh-dns-healthcheck
