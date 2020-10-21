@@ -1,6 +1,8 @@
 ---
 name: pdns
 blobstore:
-  provider: gcs
+  provider: s3
   options:
-    bucket_name: pdns-release
+    bucket_name: pdns-boshrelease-blobstore
+    region: eu-west-2
+    host: s3-eu-west-2.amazonaws.com
