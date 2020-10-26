@@ -5,4 +5,3 @@ blobstore:
   options:
     bucket_name: pdns-boshrelease-blobstore
     region: eu-west-2
-    host: s3-eu-west-2.amazonaws.com
