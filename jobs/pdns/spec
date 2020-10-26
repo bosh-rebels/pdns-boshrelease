@@ -15,19 +15,47 @@ packages:
 - pdns
 - sqlite
 
+provides:
+- name: pdns
+  type: pdns
+  properties:
+    - pdns.local_address
+    - pdns.only_notify
+    - pdns.webserver
+    - pdns.webserver_address
+    - pdns.webserver_port
+    - pdns.webserver_allow_from
+    - pdns.api
+    - pdns.api_key
+
 properties:
   sqlite.database:
+    default: dns.db
     description: Name of sqlite database, if using gsqlite3 backend
   named_conf:
     default: ''
     description: |
       The contents of named.conf (PowerDNS's BIND backend's configuration file)
+  pdns.local_address:
+    default: 0.0.0.0:53
+  pdns.only_notify:
+    default: 0.0.0.0/0
+  pdns.webserver:
+    default: true
+  pdns.webserver_address:
+    default: 0.0.0.0
+  pdns.webserver_port:
+    default: 8081
+  pdns.webserver_allow_from:
+    default: 0.0.0.0/0
+  pdns.api:
+    default: yes
+  pdns.api_key:
+    description: Key required for using the API
   pdns_conf:
-    default: |
-      launch=pipe
-      pipe-command=/var/vcap/jobs/pdns/bin/pipe.example.com.pl
+    default: ''
     description: |
-      The contents of pdns.conf (PowerDNS's configuration file).
+      Additional contents of pdns.conf (PowerDNS's configuration file).
       The default configuration configures an authoritative server for
       example.com, which can be queried via `nslookup webserver.example.com. instance's-ip`
       or `dig webserver.example.com. @instance's-ip`.

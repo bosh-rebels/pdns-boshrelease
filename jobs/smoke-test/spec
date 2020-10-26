@@ -4,6 +4,10 @@ name: smoke-test
 templates:
   run.sh.erb: bin/run
 
+consumes:
+- name: pdns
+  type: pdns
+
 packages: []
 
 properties: {}

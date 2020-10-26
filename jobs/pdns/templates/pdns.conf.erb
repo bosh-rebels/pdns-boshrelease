@@ -1,3 +1,12 @@
-master=<%= spec.bootstap.to_s %>
-slave=<%= (!spec.bootstap).to_s %>
+launch=gsqlite3
+gsqlite3-database=/var/vcap/store/pdns/dns.db
+do-ipv6-additional-processing=no
+local-address=<%= p('pdns.local_address') %>
+only-notify=<%= p('pdns.only_notify') %>
+webserver=<%= p('pdns.only_notify') %>
+webserver-address=<%= p('pdns.webserver_address') %>
+webserver-port=<%= p('pdns.webserver_port') %>
+webserver-allow-from=<%= p('pdns.webserver_allow_from') %>
+api=<%= p('pdns.api') %>
+api-key=<%= p('pdns.api_key') %>
 <%= p('pdns_conf') %>

@@ -1,18 +1,55 @@
 #!/bin/bash
 set -e
 
-<% if spec.bootstrap %>
+<%
+webserver_host = "127.0.0.1:#{link("pdns").p('pdns.webserver_port')}"
+api_key = link("pdns").p('pdns.api_key')
+%>
 
-api_password=$(grep api-key /var/vcap/jobs/pdns/etc/pdns.conf | sed 's/api-key=//g')
-payload='{"name":"smoke-testing.org.", "kind": "Master","dnssec":false,"soa-edit":"INCEPTION-INCREMENT","masters": [], "nameservers": ["ns1.smoke-testing.org."]}'
+function request_webserver {
+    local verb=$1
+    local path=$2
+    local body=$3
 
-printf "setting a test zone\n"
-curl --silent --fail --request POST --header "X-API-Key: ${api_password}" --data "$payload" http://127.0.0.1:8081/api/v1/servers/localhost/zones
+    curl_args=(--silent --fail --request "$verb" --header "X-API-Key: <%= api_key %>")
+    
+    if [[ -f "$body" ]]; then
+        curl_args=("${curl_args[@]}" --data @"${body}")
+    fi
 
-printf "\ngetting the test zone\n"
-curl --silent --fail --request GET --header "X-API-Key: ${api_password}" http://127.0.0.1:8081/api/v1/servers/localhost/zones/smoke-testing.org.
+    curl "${curl_args[@]}" "http://<%= webserver_host %>${path}"
+}
 
-printf "\ndeleting the test zone\n"
-curl --silent --fail --request DELETE --header "X-API-Key: ${api_password}" http://127.0.0.1:8081/api/v1/servers/localhost/zones/smoke-testing.org.
-printf "\nerrand has finished\n"
-<% end %>
+cat <<EOF > zone.json
+{
+  "name": "smoke-testing.org.",
+  "kind": "Native",
+  "dnssec": false,
+  "soa-edit": "",
+  "rrsets": [
+    {
+      "name": "an-a-record.smoke-testing.org.",
+      "type": "A",
+      "ttl": 200,
+      "records": [
+        {
+          "content": "10.10.10.1",
+          "disabled": false
+        }
+      ]
+    }
+  ]
+}
+EOF
+
+echo "Setting a test zone"
+request_webserver POST /api/v1/servers/localhost/zones zone.json
+
+echo "Getting the test zone"
+request_webserver GET /api/v1/servers/localhost/zones/smoke-testing.org.
+
+nslookup an-a-record.smoke-testing.org 127.0.0.1
+
+echo "Deleting the test zone"
+
+request_webserver DELETE /api/v1/servers/localhost/zones/smoke-testing.org.

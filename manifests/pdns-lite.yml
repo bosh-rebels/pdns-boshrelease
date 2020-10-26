@@ -22,23 +22,11 @@ instance_groups:
   jobs:
   - name: smoke-test
     release: pdns
-    properties: {}
   - name: pdns
     release: pdns
     properties:
-      sqlite:
-        database: dns.db
-      pdns_conf: |
-        launch=gsqlite3
-        gsqlite3-database=/var/vcap/store/pdns/dns.db
-        do-ipv6-additional-processing=no
-        local-address=0.0.0.0:53
-        only-notify=0.0.0.0/0
-        webserver=true
-        webserver-address=0.0.0.0
-        webserver-allow-from=0.0.0.0/0
-        api=yes
-        api-key=((api_key))
+      pdns:
+        api_key: ((api_key))
 
 variables:
   - name: api_key
