@@ -3,7 +3,7 @@ name: pdns
 
 releases:
 - name: pdns
-  version: latest
+  version: 1.0.3+dev.1
 
 stemcells:
 - alias: ubuntu
@@ -27,6 +27,21 @@ instance_groups:
     properties:
       pdns:
         api_key: ((api_key))
+      zones:
+        - name: example.com
+          records:
+            - name: example.com
+              type: SOA
+              content: localhost admin.example.com 1 10380 3600 604800 3600
+              ttl: 86400
+            - name: www.example.com
+              type: A
+              ttl: 500
+              content: 10.0.0.1
+            - name: www.example.com
+              type: A
+              ttl: 500
+              content: 10.0.0.2
 
 variables:
   - name: api_key

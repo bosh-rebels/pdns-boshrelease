@@ -8,6 +8,7 @@ templates:
   pipe.erb: bin/pipe
   pipe.example.com.pl: bin/pipe.example.com.pl
   seed/schema.sqlite3.sql: seed/schema.sqlite3.sql
+  seed/zones.sqlite3.sql: seed/zones.sqlite3.sql
   pre-start.erb: bin/pre-start
 
 packages:
@@ -41,7 +42,7 @@ properties:
   pdns.only_notify:
     default: 0.0.0.0/0
   pdns.webserver:
-    default: true
+    default: false
   pdns.webserver_address:
     default: 0.0.0.0
   pdns.webserver_port:
@@ -78,3 +79,23 @@ properties:
       The contents of [optional] pipe.conf (PowerDNS's pipe backend's configuration file)
       A good example is the xip-pdns pipe backend's sample configuration file:
       https://github.com/basecamp/xip-pdns/blob/master/etc/xip-pdns.conf.example
+  zones:
+    default: []
+    description: Zones to add to PowerDNS database
+    example:
+      - name: example.com
+        records:
+          - name: www.example.com
+            content: 10.0.0.1
+            type: A
+            ttl: 500
+          - name: www.example.com
+            content: 10.0.0.2
+            type: A
+            ttl: 500
+      - name: another-example.corp
+        records:
+          - name: some.another-example.corp
+            type: CNAME
+            content: whatever.corp.
+            ttl: 900

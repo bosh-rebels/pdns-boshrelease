@@ -9,7 +9,7 @@ PACKAGE_DIR="/var/vcap/packages/$JOB_NAME"
 mkdir -p "${STORE_DIR}"
 
 <% if_p("sqlite.database") do |database| %>
-  if [ ! -f "${STORE_DIR}/<%= database %>" ]; then
-    /var/vcap/packages/sqlite/bin/sqlite3 "${STORE_DIR}/<%= database %>" < "${JOB_DIR}/seed/schema.sqlite3.sql"
-  fi
+rm -rf ${STORE_DIR}/<%= database %>
+/var/vcap/packages/sqlite/bin/sqlite3 "${STORE_DIR}/<%= database %>" < "${JOB_DIR}/seed/schema.sqlite3.sql"
+/var/vcap/packages/sqlite/bin/sqlite3 "${STORE_DIR}/<%= database %>" < "${JOB_DIR}/seed/zones.sqlite3.sql"
 <% end %>
