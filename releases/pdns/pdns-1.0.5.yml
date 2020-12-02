@@ -1,0 +1,46 @@
+name: pdns
+version: 1.0.5
+commit_hash: 9d9dbf6
+uncommitted_changes: false
+jobs:
+- name: pdns
+  version: d661a34c9c08eac1f4171fe83606db1558f6f5a8647c29e834e65322ede7d907
+  fingerprint: d661a34c9c08eac1f4171fe83606db1558f6f5a8647c29e834e65322ede7d907
+  sha1: sha256:f83c4a9ce56b07ba8c4db0e62c1310c0283094084b1803b699cbf92e4004b219
+  packages:
+  - boost
+  - pdns
+  - sqlite
+- name: smoke-test
+  version: 9e73745ebcfb63e643205242d26d898dfa7be248181bedfc498d63143ee85bd0
+  fingerprint: 9e73745ebcfb63e643205242d26d898dfa7be248181bedfc498d63143ee85bd0
+  sha1: sha256:230a824a534881b4e15a94f16bcf12170cf44df109f8df87a0bcb0f4c27baa61
+  packages: []
+packages:
+- name: boost
+  version: 329e37dc2fac7fd4caad4c8de9645c7b9238d2cd7ae034920afd530e15aae126
+  fingerprint: 329e37dc2fac7fd4caad4c8de9645c7b9238d2cd7ae034920afd530e15aae126
+  sha1: sha256:4d3e7a9c3ec4853d22c45bb4c223c0cfcb63a4dd72db6873b295c0781eb17a37
+  dependencies: []
+- name: lua
+  version: 7c86dec3f40ac05d09e02aa73f79022809ddfd57bfafdad1fb00624decac0b37
+  fingerprint: 7c86dec3f40ac05d09e02aa73f79022809ddfd57bfafdad1fb00624decac0b37
+  sha1: sha256:16cf950c7ae3f3a5169f2046a5493ca8cd445546c022fa9760e9af149e6d489d
+  dependencies: []
+- name: pdns
+  version: 216f8d4cefd4cbb1ba49af3263bb0e1706f285da06546412738d7120a4f18206
+  fingerprint: 216f8d4cefd4cbb1ba49af3263bb0e1706f285da06546412738d7120a4f18206
+  sha1: sha256:2e47c31232f8c7e6433334e0a378b3d3260b0f7d87e3b9a90a86468a482deb43
+  dependencies:
+  - boost
+  - sqlite
+  - lua
+- name: sqlite
+  version: 43a00e040324789ed4c9c6f34ff69076d2a33cf33fe2cb0c996699684af7b503
+  fingerprint: 43a00e040324789ed4c9c6f34ff69076d2a33cf33fe2cb0c996699684af7b503
+  sha1: sha256:debcd7558ebc161e1321238a6b3291ff30fa5e0bb4f7b747cf6bae7384a829d5
+  dependencies: []
+license:
+  version: 7f98c46631d3146de6d01e351cf7813545974e4e0db40727262ab3185bdd0d04
+  fingerprint: 7f98c46631d3146de6d01e351cf7813545974e4e0db40727262ab3185bdd0d04
+  sha1: sha256:0aa1c1eb321bb33e764a303f04508f31a1c8d20c013f779f8ff8babdd966c726
